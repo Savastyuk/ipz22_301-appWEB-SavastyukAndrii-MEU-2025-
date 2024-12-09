@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Academy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Programming Academy</h1>
+            <nav class="nav">
+                <a href="#courses">Courses</a>
+                <a href="#about">About Us</a>
+                <a href="#signup">Sign Up</a>
+            </nav>
+            <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
+        </div>
+    </header>
+
+    <section id="hero" class="hero">
+        <div class="container">
+            <h2>Master Programming Skills!</h2>
+            <p>Interactive lessons, real-world projects, and certifications to kickstart your programming career.</p>
+            <a href="#courses" class="btn">Start Learning</a>
+        </div>
+    </section>
+
+    <section id="courses" class="courses">
+        <div class="container">
+            <h2>Popular Courses</h2>
+            <div class="course-list">
+                <div class="course">
+                    <h3>HTML & CSS Basics</h3>
+                    <p>Learn how to structure and style web pages effectively.</p>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+                <div class="course">
+                    <h3>JavaScript Essentials</h3>
+                    <p>Make your websites dynamic and interactive with JavaScript.</p>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+                <div class="course">
+                    <h3>Python for Beginners</h3>
+                    <p>Dive into Python programming and start building your own tools.</p>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>
+                At Programming Academy, we believe everyone can learn programming. Our mission is to make high-quality coding education accessible to all, with interactive tools and expert support.
+            </p>
+        </div>
+    </section>
+
+    <section id="signup" class="signup">
+        <div class="container">
+            <h2>Join a Course</h2>
+            <form>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your full name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Your email address" required>
+
+                <label for="course">Select a Course</label>
+                <select id="course" name="course">
+                    <option value="html-css">HTML & CSS Basics</option>
+                    <option value="javascript">JavaScript Essentials</option>
+                    <option value="python">Python for Beginners</option>
+                </select>
+
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Programming Academy. All rights reserved.</p>
+            <p><a href="#hero">Back to Top</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('.nav');
+
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
