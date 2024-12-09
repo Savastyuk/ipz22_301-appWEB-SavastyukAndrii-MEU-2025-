@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Academy</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Programming Academy</h1>
+            <nav class="nav">
+                <a href="#courses">Courses</a>
+                <a href="#about">About Us</a>
+                <a href="#signup">Sign Up</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero" class="hero">
+        <div class="container">
+            <h2>Learn Programming Today!</h2>
+            <p>Interactive courses, hands-on projects, and certificates.</p>
+            <a href="#courses" class="btn">Explore Courses</a>
+        </div>
+    </section>
+
+    <section id="courses" class="courses">
+        <div class="container">
+            <h2>Our Courses</h2>
+            <div class="course-list">
+                <div class="course">
+                    <h3>HTML & CSS Basics</h3>
+                    <p>Learn the fundamentals of web development.</p>
+                </div>
+                <div class="course">
+                    <h3>JavaScript for Beginners</h3>
+                    <p>Build interactive websites with JavaScript.</p>
+                </div>
+                <div class="course">
+                    <h3>Python Programming</h3>
+                    <p>Start your journey in data science and automation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>
+                Programming Academy is dedicated to providing top-quality education in programming. Our courses are designed to be beginner-friendly yet robust enough to take you to the next level.
+            </p>
+        </div>
+    </section>
+
+    <section id="signup" class="signup">
+        <div class="container">
+            <h2>Sign Up for a Course</h2>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="course">Choose a Course:</label>
+                <select id="course" name="course">
+                    <option value="html-css">HTML & CSS Basics</option>
+                    <option value="javascript">JavaScript for Beginners</option>
+                    <option value="python">Python Programming</option>
+                </select>
+
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+        </div>s
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Programming Academy. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
