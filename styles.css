@@ -57,6 +57,17 @@ body {
     font-size: 1.5em;
 }
 
+/* Theme toggle button */
+.theme-toggle {
+    display: inline-block;
+    margin-left: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
 /* Hero */
 .hero {
     background: linear-gradient(135deg, #333, #555);
@@ -133,6 +144,88 @@ body {
 
 .course .btn-secondary:hover {
     background: #555;
+}
+
+/* Reviews (new) */
+.reviews {
+    padding: 60px 20px;
+    background: linear-gradient(180deg, #fff, #fafafa);
+}
+
+.reviews h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.reviews-wrap {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+    position: relative;
+}
+
+.review-slider {
+    max-width: 800px;
+    width: 100%;
+    min-height: 140px;
+    padding: 20px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    text-align: center;
+}
+
+.review-item {
+    display: none; /* JS пока що покаже потрібний */
+}
+
+.review-item .quote {
+    font-size: 1.1em;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.review-item .author {
+    font-weight: 500;
+    color: #666;
+}
+
+/* review nav buttons */
+.review-nav {
+    background: none;
+    border: 1px solid #ddd;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+}
+
+.review-nav:hover {
+    background: #f3f3f3;
+}
+
+/* dots */
+.review-dots {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.review-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    background: #ddd;
+    cursor: pointer;
+}
+
+.review-dot.active,
+.review-dot:hover {
+    background: #333;
 }
 
 /* Signup */
@@ -216,5 +309,134 @@ body {
 
     .course-list {
         grid-template-columns: 1fr;
+    }
+
+    .reviews-wrap {
+        flex-direction: column;
+    }
+
+    .review-nav {
+        align-self: center;
+    }
+}
+
+/* === Dark mode styles (new) ===
+   Ми використовуємо атрибут data-theme="dark" на body,
+   щоб переключити кольори без зміни існуючих класів.
+*/
+body[data-theme="dark"] {
+    background: #3a3c41;
+    color: #e6e6e6;
+}
+
+body[data-theme="dark"] .header {
+    background: #0b0b0b;
+}
+
+body[data-theme="dark"] .header .nav a {
+    color: #e6e6e6;
+}
+
+body[data-theme="dark"] .hero {
+    background: linear-gradient(135deg, #0b0b0b, #1b1b1b);
+}
+
+body[data-theme="dark"] .course {
+    background: #0f1114;
+    box-shadow: none;
+    border: 1px solid rgba(255,255,255,0.04);
+}
+
+body[data-theme="dark"] .course .btn-secondary {
+    background: #222;
+}
+
+body[data-theme="dark"] .signup {
+    background: #0f1114;
+}
+
+body[data-theme="dark"] .signup input,
+body[data-theme="dark"] .signup select {
+    background: #0b0b0b;
+    color: #302f2f;
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+body[data-theme="dark"] .footer {
+    background: #070708;
+}
+
+body[data-theme="dark"] .review-slider {
+    background: #363636;
+    box-shadow: none;
+    border: 1px solid rgba(255,255,255,0.04);
+}
+
+body[data-theme="dark"] .review-dot {
+    background: rgba(108, 108, 108, 0.06);
+}
+body[data-theme="dark"] .review-dot.active {
+    background: #343333;
+}
+
+/* Responsive tweaks for theme button positioning */
+@media (min-width: 769px) {
+    .theme-toggle {
+        position: relative;
+        top: -2px;
+    }
+}
+
+.reviews h2 {
+    color: #222222; /* темний заголовок для світлої теми */
+}
+
+/* Ensure review slider text is dark on light background */
+.review-slider {
+    color: #222222;
+    background: #ffffff; /* явний білий для світлої теми */
+}
+
+/* Override reviews background in dark theme and make text readable */
+body[data-theme="dark"] .reviews {
+    background: linear-gradient(180deg, #0b0b0b, #0f0f0f); /* темний фон для секції */
+}
+
+/* Heading color in dark theme */
+body[data-theme="dark"] .reviews h2 {
+    color: #e6eef3; /* світлий заголовок у темній темі */
+}
+
+/* Slider background + text color in dark theme */
+body[data-theme="dark"] .review-slider {
+    background: #0f1417; /* темний каркас під відгуки */
+    color: #e6eef3;      /* світлий текст */
+    box-shadow: none;
+    border: 1px solid rgba(255,255,255,0.04);
+}
+
+/* Dots visibility in dark theme */
+body[data-theme="dark"] .review-dot {
+    background: rgba(255,255,255,0.08);
+}
+
+body[data-theme="dark"] .review-dot.active,
+body[data-theme="dark"] .review-dot:hover {
+    background: #ff8a50; /* активна крапка в тон акценту (можна змінити) */
+}
+
+/* Fix form input text color in dark theme (у вас був темний колір #302f2f — заміняємо на світлий) */
+body[data-theme="dark"] .signup input,
+body[data-theme="dark"] .signup select {
+    background: #0b0b0b;
+    color: #e6eef3; /* читабельний світлий текст */
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Якщо потрібно: на мобільних показувати кнопки навігації відгуків (залишається як є) */
+@media (max-width: 768px) {
+    /* переконаємось, що в мобільній темі відгуки також темні */
+    body[data-theme="dark"] .review-slider {
+        background: #0f1417;
     }
 }

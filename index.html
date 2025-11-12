@@ -16,7 +16,12 @@
                 <a href="#courses">Courses</a>
                 <a href="#about">About Us</a>
                 <a href="#signup">Sign Up</a>
+                <a href="#reviews">Reviews</a> <!-- новий пункт в навігації -->
             </nav>
+
+            <!-- Dark mode toggle (не ламає нічого, показується поряд з меню) -->
+            <button class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">🌙</button>
+
             <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
         </div>
     </header>
@@ -61,6 +66,40 @@
         </div>
     </section>
 
+    <!-- Нова секція: Відгуки -->
+    <section id="reviews" class="reviews">
+        <div class="container">
+            <h2>What students say</h2>
+
+            <div class="reviews-wrap">
+                <button class="review-nav prev" aria-label="Previous review">&larr;</button>
+
+                <div class="review-slider">
+                    <!-- Кожен .review-item — окремий відгук -->
+                    <article class="review-item" data-index="0">
+                        <p class="quote">"Great courses — clear explanations and real projects. I got my first dev job!"</p>
+                        <p class="author">— Olena, Frontend Developer</p>
+                    </article>
+
+                    <article class="review-item" data-index="1">
+                        <p class="quote">"Supportive mentors and practical tasks. Highly recommended for beginners."</p>
+                        <p class="author">— Mark, Junior Python Dev</p>
+                    </article>
+
+                    <article class="review-item" data-index="2">
+                        <p class="quote">"Loved the JavaScript course — projects were challenging and fun."</p>
+                        <p class="author">— Yulia, Web Developer</p>
+                    </article>
+                </div>
+
+                <button class="review-nav next" aria-label="Next review">&rarr;</button>
+            </div>
+
+            <!-- Дрібні індикатори -->
+            <div class="review-dots" aria-hidden="true"></div>
+        </div>
+    </section>
+
     <section id="signup" class="signup">
         <div class="container">
             <h2>Join a Course</h2>
@@ -91,12 +130,112 @@
     </footer>
 
     <script>
+        // === Існуючий код меню ===
         const menuToggle = document.querySelector('.menu-toggle');
         const nav = document.querySelector('.nav');
 
         menuToggle.addEventListener('click', () => {
             nav.classList.toggle('active');
         });
+
+        // === Перемикач темного режиму ===
+        const themeToggle = document.querySelector('.theme-toggle');
+        const body = document.body;
+        const THEME_KEY = 'pa_theme'; // ключ в localStorage
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                body.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = '☀️';
+            } else {
+                body.removeAttribute('data-theme');
+                themeToggle.textContent = '🌙';
+            }
+        }
+
+        // Ініціалізація теми з localStorage або системних налаштувань
+        const savedTheme = localStorage.getItem(THEME_KEY);
+        if (savedTheme) {
+            applyTheme(savedTheme);
+        } else {
+            // опціонально підлаштуватися під системну темну
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(prefersDark ? 'dark' : 'light');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const current = body.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+            const next = current === 'dark' ? 'light' : 'dark';
+            applyTheme(next);
+            localStorage.setItem(THEME_KEY, next);
+        });
+
+        // === Простий слайдер відгуків ===
+        (function initReviews() {
+            const slider = document.querySelector('.review-slider');
+            const items = Array.from(document.querySelectorAll('.review-item'));
+            const prevBtn = document.querySelector('.review-nav.prev');
+            const nextBtn = document.querySelector('.review-nav.next');
+            const dotsWrap = document.querySelector('.review-dots');
+
+            if (!slider || items.length === 0) return;
+
+            let index = 0;
+
+            // встановити ширини/позиції
+            function update() {
+                // ховаємо всі і показуємо тільки поточний
+                items.forEach((it, i) => {
+                    it.style.display = i === index ? 'block' : 'none';
+                });
+                // оновлюємо крапки
+                const dots = Array.from(dotsWrap.children);
+                dots.forEach((d, i) => d.classList.toggle('active', i === index));
+            }
+
+            // створюємо крапки
+            items.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'review-dot';
+                dot.setAttribute('aria-label', 'Go to review ' + (i + 1));
+                dot.type = 'button';
+                dot.addEventListener('click', () => {
+                    index = i;
+                    update();
+                });
+                dotsWrap.appendChild(dot);
+            });
+
+            prevBtn.addEventListener('click', () => {
+                index = (index - 1 + items.length) % items.length;
+                update();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                index = (index + 1) % items.length;
+                update();
+            });
+
+            // автоперемикання (опціонально) — вимкнути якщо не потрібно
+            let autoplay = true;
+            let timer = null;
+            function startAutoplay() {
+                if (!autoplay) return;
+                stopAutoplay();
+                timer = setInterval(() => {
+                    index = (index + 1) % items.length;
+                    update();
+                }, 6000);
+            }
+            function stopAutoplay() {
+                if (timer) clearInterval(timer);
+            }
+            slider.addEventListener('mouseenter', stopAutoplay);
+            slider.addEventListener('mouseleave', startAutoplay);
+
+            update();
+            startAutoplay();
+        })();
     </script>
 </body>
 </html>
